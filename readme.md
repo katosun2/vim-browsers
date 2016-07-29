@@ -6,8 +6,10 @@
 
 定义变量 $BROWSERS 设置快捷方式目录
 
+```
 let $BROWSERS = $VIM . 'browsers'
 if exists('*mkdir') && !isdirectory($BROWSERS)
     sil! cal mkdir($BROWSERS, 'p')
 endif
 let $BROWSERS = $BROWSERS
+```
