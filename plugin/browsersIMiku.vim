@@ -11,9 +11,25 @@
 "=============================================================================
 
 if exists('*mkdir') && !isdirectory($BROWSERS) || exists("*GetLnk")
-
 	finish
 endif
+
+if !exists('g:htdocs')
+    let g:htdocs = []
+endif
+
+if !exists('g:servurls')
+    let g:servurls = []
+endif
+
+if !exists('g:htdoc_f5_open')
+	let g:htdoc_f5_open = 0
+endif
+
+if !exists('g:htdoc_f5')
+	let g:htdoc_f5 = []
+endif
+
 
 "加载浏览器快捷方式列表
 let g:my_browsers = {} 
@@ -62,16 +78,17 @@ function! s:ViewInBrowser(b_path)
     let servurl = ""
 
     let s:i = 0
+	let strpos = -1
     for key in g:htdocs
         let key = substitute(key,'\\','\/',"g")
-        let strpos = stridx(file,key) 
-        if strpos >-1
-            let strpo = strpos
-            let htdoc = key
-            let servurl = g:servurls[s:i] 
-            break
-        endif
-        let s:i = s:i + 1
+		let strpos = stridx(file,key) 
+		if strpos >-1
+			let strpo = strpos
+			let htdoc = key
+			let servurl = g:servurls[s:i] 
+			break
+		endif
+		let s:i = s:i + 1
     endfor
 
     " can not Edit
